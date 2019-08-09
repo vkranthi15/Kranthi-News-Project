@@ -35,11 +35,11 @@ class WebViewDetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NewsDetailViewModel::class.java)
+        activity?.txtTitleHeading?.text = "News Detail"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.txtTitleHeading?.text = "News Detail"
         arguments?.let {
             val articleObj = arguments?.getSerializable("articleObj") as Article
             initWebView(articleObj)
@@ -56,5 +56,10 @@ class WebViewDetailFragment : Fragment() {
             }
         }
         webview.loadUrl(articleObj.url)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.txtTitleHeading?.text = "News List"
     }
 }
