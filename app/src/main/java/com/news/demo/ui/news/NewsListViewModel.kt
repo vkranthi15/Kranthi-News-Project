@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class NewsListViewModel @Inject constructor(private val repo: NewsRepository) : ViewModel() {
+class NewsListViewModel @Inject constructor(private val repo: NewsRepository?) : ViewModel() {
     // declare state for news list
     val stateLiveData = MutableLiveData<NewsListState>()
 
@@ -37,11 +37,11 @@ class NewsListViewModel @Inject constructor(private val repo: NewsRepository) : 
         getNewsList()
     }
 
-    private fun getNewsList() {
-        val result = repo.getTopNews(country = country, category = category, apiKey = API_KEY)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onNewsReceived, this::onError)
+    fun getNewsList() {
+        val result = repo?.getTopNews(country = country, category = category, apiKey = API_KEY)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(this::onNewsReceived, this::onError)
     }
 
     private fun onError(error: Throwable) {
