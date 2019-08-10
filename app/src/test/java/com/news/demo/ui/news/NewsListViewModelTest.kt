@@ -2,7 +2,7 @@ package com.news.demo.ui.news
 
 
 import org.junit.Rule
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
@@ -60,8 +60,8 @@ class NewsListViewModelTest {
         `when`(apiClient?.getTopNews(country = AppConstants.country, category = AppConstants.country, apiKey = AppConstants.API_KEY)).thenReturn(Single.just(emptyList()))
         viewModel?.getNewsList()
 
-        verify(observer).onChanged(LoadingState(emptyList(), false))
-        verify(observer).onChanged(DefaultState(emptyList(), false))
+        verify(observer)?.onChanged(LoadingState(emptyList(), false))
+        verify(observer)?.onChanged(DefaultState(emptyList(), false))
 
     }
 
@@ -69,8 +69,8 @@ class NewsListViewModelTest {
     fun testApiFetchDataError() {
         `when`(apiClient?.getTopNews(country = AppConstants.country, category = AppConstants.country, apiKey = AppConstants.API_KEY)).thenReturn(Single.just(emptyList()))
         viewModel?.getNewsList()
-        verify(observer).onChanged(LoadingState(emptyList(), false))
-        verify(observer).onChanged(ErrorState("Error", emptyList(), false))
+        verify(observer)?.onChanged(LoadingState(emptyList(), false))
+        verify(observer)?.onChanged(ErrorState("Error", emptyList(), false))
     }
 
     @After
